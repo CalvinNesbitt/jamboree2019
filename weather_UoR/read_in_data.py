@@ -39,7 +39,7 @@ weather_no_nan_march = weather_no_nan[weather_no_nan['Month'] == 3].reset_index(
 
 ## correlation heat_map
 
-corr = weather_no_nan.corr()
+corr = weather_no_nan_march.corr()
 
 sns.heatmap(corr, 
             xticklabels=corr.columns.values,

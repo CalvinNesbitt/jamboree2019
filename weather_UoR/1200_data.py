@@ -28,7 +28,8 @@ for i in column_list:
     
 
 
-noon = weather_no_nan[weather_no_nan['Time']=='1200'].reset_index(drop=True).drop(labels=['TimeStamp','Time'],axis=1)
+noon = weather_no_nan[weather_no_nan['Time']=='1200'].reset_index(drop=True).drop(labels=['Time'],axis=1)
 
 print(noon.mean())
 print(noon.var())
+

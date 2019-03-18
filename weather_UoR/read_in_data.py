@@ -8,7 +8,7 @@ Created on Mon Mar 18 10:56:07 2019
 
 import pandas as pd
 #import matplotlib.pyplot as plt
-import seaborn as sns
+#import seaborn as sns
 #import numpy as np
 from datetime import datetime
 
@@ -36,14 +36,16 @@ weather_no_nan['Month'] = weather_no_nan['TimeStamp'].map(lambda x: x.month)
 
 weather_no_nan_march = weather_no_nan[weather_no_nan['Month'] == 3].reset_index(drop = True)
 
+print(weather_no_nan_march)
+
 
 ## correlation heat_map
 
-corr = weather_no_nan.corr()
+#corr = weather_no_nan.corr()
 
-sns.heatmap(corr, 
-            xticklabels=corr.columns.values,
-            yticklabels=corr.columns.values)
+#sns.heatmap(corr, 
+            #xticklabels=corr.columns.values,
+            #yticklabels=corr.columns.values)
 
 
 

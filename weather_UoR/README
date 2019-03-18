@@ -38,5 +38,13 @@ To make this prediction, you may use the data in this csv file, which
 you can refresh from https://metdata.reading.ac.uk/cgi-bin/MODE3.cgi
 by selecting "1-hour WMO-standard processed output" and selecting the
 appropriate variables. You may also make use of any other publically
-available datasets and forecasts. We would like you to present your
-prediction strategy to us in the 3pm-5pm presentation slot on Tuesday 19th March.
+available datasets and forecasts. You might also find the following
+useful:
+* A dataset of ensemble forecasts from ECMWF for a gridpoint near Reading
+http://www.personal.reading.ac.uk/~pt904209/pub/farnborough.tar.gz
+* The same for grid points from Benson and Heathrow
+http://www.personal.reading.ac.uk/~pt904209/pub/farnborough_benson_heathrow.tar.gz
+
+
+We would like you to present your prediction strategy to us in the
+3pm-5pm presentation slot on Tuesday 19th March.

@@ -42,7 +42,8 @@ for i in column_list:
 
 ## correlation heat_map
 
-#corr = weather_no_nan.corr()
+corr = weather_no_nan_march.corr()
+
 
 #sns.heatmap(corr, 
             #xticklabels=corr.columns.values,

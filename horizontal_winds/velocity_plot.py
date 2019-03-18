@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 files = []
 with open('velocity_x.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
-    x_vel = np.empty([9,9])
+    x_vel = np.zeros([9,9])
     r = 0
     for row in readCSV:
         for i in range(0,8):
@@ -23,7 +23,7 @@ with open('velocity_x.csv') as csvfile:
 
 with open('velocity_y.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
-    y_vel = np.empty([9,9])
+    y_vel = np.zeros([9,9])
     r = 0
     for row in readCSV:
         for i in range(0,8):

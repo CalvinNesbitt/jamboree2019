@@ -121,3 +121,8 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# No files or images
+.pdf
+.png
+.jpeg

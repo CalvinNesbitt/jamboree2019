@@ -147,6 +147,7 @@ with open('lagrangian_extra.json') as infile:
 
 X_val,y_val,characteristics=get_trajectory_signature(d)
 keep_inds = [~np.isnan(X_val).any(axis=1)]
+print(keep_inds)
 X_val = X_val[keep_inds]
 y_val = y_val[keep_inds]
 X_val_scaled = preprocessing.scale(X_val)
@@ -174,6 +175,6 @@ print(pred_lon)
 print(pred_lat)
 
 all_output = np.array((pred_lon,pred_lat,err_lon,err_lat))
-np.savetxt("output_prediction.csv", all_output, delimiter=",")
+np.savetxt("output_prediction1,2.csv", all_output, delimiter=",")
 
 

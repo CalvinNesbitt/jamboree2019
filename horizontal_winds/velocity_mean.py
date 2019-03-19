@@ -1,6 +1,9 @@
 import numpy as np
 import csv
 import matplotlib.pyplot as plt
+#import pandas as pd
+#df1 = pd.velocity_x.csv
+#df2 = pd.velocity_y.csv
 
 n = 9
 X, Y = np.mgrid[0:n, 0:n]
@@ -20,13 +23,13 @@ with open('velocity_x.csv') as csvfile:
                 x_velt[i, j] = row[1+i*9+j]
         x_vel = x_vel + x_velt
     x_avg = (1/9999)*x_vel
-    plt.clf()
-    plt.imshow(x_avg, interpolation='nearest')
-    plt.colorbar()
-    fname = 'plots/x_avg.png'
-    print('Saving frame', fname)
-    plt.savefig(fname)
-    plt.clf()
+    # plt.clf()
+    # plt.imshow(x_avg, interpolation='nearest')
+    # plt.colorbar()
+    # fname = 'plots/x_avg.png'
+    # print('Saving frame', fname)
+    # plt.savefig(fname)
+    # plt.clf()
 
 
 with open('velocity_y.csv') as csvfile:
@@ -40,18 +43,26 @@ with open('velocity_y.csv') as csvfile:
                 y_velt[i, j] = row[1+i*9+j]
         y_vel = y_vel + y_velt
     y_avg = (1/9999)*y_vel
-    plt.clf()
-    plt.imshow(y_avg, interpolation='nearest')
-    plt.colorbar()
-    fname = 'plots/y_avg.png'
-    print('Saving frame', fname)
-    plt.savefig(fname)
-    files.append(fname)
-    plt.clf()
+    # plt.clf()
+    # plt.imshow(y_avg, interpolation='nearest')
+    # plt.colorbar()
+    # fname = 'plots/y_avg.png'
+    # print('Saving frame', fname)
+    # plt.savefig(fname)
+    # files.append(fname)
+    # plt.clf()
 
-U = x_avg[X, Y]
-V = y_avg[X, Y]
+quiver = 1 #set to 1 for quiver plot
+if quiver == 1:
+    U = x_avg[X, Y].T
+    V = y_avg[X, Y].T
 
-plt.quiver(X, Y, U, V, alpha=.5)
-plt.quiver(X, Y, U, V, edgecolor='k', facecolor='None', linewidth=.5)
-plt.show()
+    plt.quiver(X, Y, U, V, alpha=.5)
+    plt.quiver(X, Y, U, V, edgecolor='k', facecolor='None', linewidth=.5)
+    plt.show()
+
+with open('velocity_x.csv') as cvsfile:
+    readCSV = csv.reader(cvsfile, delimiter=',')
+    x_var = np.zeros([9,9])
+    for row in readCSV:
+        np.var(np.array(row))

@@ -1,0 +1,7 @@
+README FOR FLOATS
+
+This csv file is ordered by:
+ prediction lon, prediction lat, variance lon, variance lat
+
+for all 3 predictions
+Use read_outputfile.py to read more easily

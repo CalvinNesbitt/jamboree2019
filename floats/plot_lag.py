@@ -2,13 +2,13 @@ from read_lagrangian import *
 import matplotlib.pyplot as plt
 from plot_one_trajectory import *
 
-# test one trajectory
-traj = d[10]
 
-print(traj)
-
-plot_one_trajectory(traj)
-
-traj2 = d[20]
-plot_one_trajectory(traj2)
+plot_temp_contour(d)
 plt.show()
+exit()
+for j in range(0,10):
+   # get jth trajectory 
+   traj = d[j]
+
+
+   plot_one_trajectory_color(traj)

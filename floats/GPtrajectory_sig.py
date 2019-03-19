@@ -28,7 +28,8 @@ with open('lagrangian.json') as infile:
 
 from velocity import get_velocity
 
-characteristics = ['mean u','mean v','var u','var v','x dist','y dist','mean temp','mean var']
+characteristics = ['mean u','mean v','var u','var v','variance x','variance y','mean temp','mean var',
+                           'direction x', 'direction y','standing eddy kinetic energy','kinetic energy','gyration']
 # add more tomorrow
 #temp gradient in x and y, speed, overall direction of trajectory,
 trajectory_signature = np.zeros((600,len(characteristics)))
@@ -46,12 +47,38 @@ for j in range(600):
     # variance u and v
     trajectory_signature[j,2]=np.var(vel[0])
     trajectory_signature[j,3]=np.var(vel[1])
-    # distance travelled in x and y 
-    trajectory_signature[j,4]=np.sum(np.array(d[j]['lon']))
-    trajectory_signature[j,5]=np.sum(np.array(d[j]['lat']))
+    # variance in x and y - how close trajectory stays to its centre
+    trajectory_signature[j,4]=np.var(np.array(d[j]['lon']))
+    trajectory_signature[j,5]=np.var(np.array(d[j]['lat']))
     # mean and var temp
     trajectory_signature[j,6] = np.mean(np.array(d[j]['temp']))
     trajectory_signature[j,7] = np.var(np.array(d[j]['temp']))
+    # direction of trajectory
+    end_point = len(d[j]['lon'])-1
+    start_point = 0
+    trajectory_signature[j,8] = d[j]['lon'][end_point] - d[j]['lon'][start_point]
+    end_point = len(d[j]['lat'])-1
+    start_point = 0
+    trajectory_signature[j,9] = d[j]['lat'][end_point] - d[j]['lat'][start_point]
+    # kinetic energy stuff
+    u = np.array(vel[0])
+    v = np.array(vel[1])
+    umean = np.mean(u)
+    vmean = np.mean(v)
+    seke = np.sqrt( np.mean((u-umean)**2)+np.mean((v-vmean)**2) )
+    ke = (np.mean(u)**2+np.mean(v)**2)
+    trajectory_signature[j,10] = seke
+    trajectory_signature[j,11] = ke
+
+    # radius of gyration
+    x = np.array(d[j]['lon'])
+    y = np.array(d[j]['lat'])
+    xmean = np.mean(x)
+    ymean = np.mean(y)
+    r2 = (x-xmean)**2 + (y-ymean)**2
+    rg = np.sqrt(np.sum(r2))/(len(r2))
+    trajectory_signature[j,12] = rg
+
 
 
 # =============================================================================

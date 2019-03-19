@@ -53,8 +53,13 @@ def point_statistics_x(t0 = 7000, t1 = 9999, t2 = 19994, t3 = 19995, t4 = 19996)
         writeCSV.writerow(x_mean)
         x_mean[0] = t4
         writeCSV.writerow(x_mean)
-    with open('Data/variances.csv', 'w') as csvfile:
+    with open('Data/variances_x.csv', 'w') as csvfile:
         writeCSV = csv.writer(csvfile, delimiter=',')
+        x_var[0] = t2
+        writeCSV.writerow(x_var)
+        x_var[0] = t3
+        writeCSV.writerow(x_var)
+        x_var[0] = t4
         writeCSV.writerow(x_var)
 
 def point_statistics_y(t0 = 7000, t1 = 9999, t2 = 19994, t3 = 19995, t4 = 19996):
@@ -91,8 +96,13 @@ def point_statistics_y(t0 = 7000, t1 = 9999, t2 = 19994, t3 = 19995, t4 = 19996)
         writeCSV.writerow(y_mean)
         y_mean[0] = t4
         writeCSV.writerow(y_mean)
-    with open('Data/variances.csv', 'a') as csvfile:
+    with open('Data/variances_y.csv', 'w') as csvfile:
         writeCSV = csv.writer(csvfile, delimiter=',')
+        y_var[0] = t2
+        writeCSV.writerow(y_var)
+        y_var[0] = t3
+        writeCSV.writerow(y_var)
+        y_var[0] = t4
         writeCSV.writerow(y_var)
 
 

@@ -61,6 +61,8 @@ def point_statistics_x(t0 = 7000, t1 = 9999, t2 = 19994, t3 = 19995, t4 = 19996)
         writeCSV.writerow(x_var)
         x_var[0] = t4
         writeCSV.writerow(x_var)
+    U = np.reshape(x_mean[1:82], (9,9))
+    return U
 
 def point_statistics_y(t0 = 7000, t1 = 9999, t2 = 19994, t3 = 19995, t4 = 19996):
     y_mean = np.zeros(82)
@@ -104,6 +106,8 @@ def point_statistics_y(t0 = 7000, t1 = 9999, t2 = 19994, t3 = 19995, t4 = 19996)
         writeCSV.writerow(y_var)
         y_var[0] = t4
         writeCSV.writerow(y_var)
+    V = np.reshape(y_mean[1:82], (9,9))
+    return V
 
 
 
@@ -141,5 +145,16 @@ def mean_point_y():
     plt.savefig(fname)
 
 
-point_statistics_x()
-point_statistics_y()
+quiver = 1 #set to 1 for quiver plot
+if quiver == 1:
+    n = 9
+    X, Y = np.mgrid[0:n, 0:n]
+    plt.clf()
+
+    U = point_statistics_x()
+    V = point_statistics_y()
+    print(V)
+
+    plt.quiver(X, Y, U, V, alpha=.5)
+    plt.quiver(X, Y, U, V, edgecolor='k', facecolor='None', linewidth=.5)
+    plt.show()

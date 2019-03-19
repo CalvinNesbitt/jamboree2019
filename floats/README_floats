@@ -1,7 +1,7 @@
-README FOR FLOATS
-
-This csv file is ordered by:
+README FOR FLOATS OUTPUT DATA
+The output data is in output_prediction_all.csv
+This csv file is ordered by row:
  prediction lon, prediction lat, variance lon, variance lat
 
-for all 3 predictions
+for all 3 predictions in columns.
 Use read_outputfile.py to read more easily

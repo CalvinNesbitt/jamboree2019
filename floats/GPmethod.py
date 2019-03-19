@@ -43,8 +43,10 @@ def TestModel(m,X_test):
     print("Validation Stage: Predicting and plotting... ")
     y_pred,cov = m.predict(X_test,full_cov=True)
     print(X_test.shape)
-    err = m.predict_quantiles(X_test)
+    # get prediction for quantile 15 and 84 which will give us 1 std dev
+    err = m.predict_quantiles(X_test,quantiles=(15.9,84.1))
     print(err)
+    # get 1 std dev using value predcted at mean (y_pred) minus the value predicted at 15.9 quantile
     gp_err = y_pred- (err[0])
     print(gp_err.shape)
     return(y_pred,gp_err)

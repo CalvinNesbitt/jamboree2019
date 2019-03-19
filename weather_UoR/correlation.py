@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+Created on Tue Mar 19 10:56:58 2019
+
+@author: mc4117
+"""
+
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
 Created on Mon Mar 18 15:48:30 2019
 
 @author: mc4117
@@ -54,62 +62,36 @@ noon['Number_of_days'] = noon['TimeStamp'].map(lambda x: (x-mydate).days)
 
 def plt_dist_24(noon_df, column_name):
 
-    restr = noon_df[['Number_of_days', column_name]]
-
-    list1_days = []
-    list1_data = []
-
-    list2_days = []
-    list2_data = []
+    restr = noon_df[['Td', 'TSoil100', 'P', column_name]]
     
-    for i in range(len(restr)):
-        list1_days.append(restr.loc[i]['Number_of_days'])
-        list1_data.append(restr.loc[i][column_name])
-        df = restr[restr['Number_of_days'] == restr['Number_of_days'][i] + 1].reset_index(drop=True)
-        if len(df) == 0:
-            list2_days.append(np.nan)
-            list2_data.append(np.nan)
-        elif len(df) == 1:
-            list2_days.append(df.loc[0]['Number_of_days'])
-            list2_data.append(df.loc[0][column_name])
-        else:
-            print('error')
-    
-    
-    df_diff = pd.concat([pd.DataFrame(list1_data, columns = [str(column_name) + '_pre']), pd.DataFrame(list2_data, columns = [str(column_name) + '_post'])], axis = 1)
-
-    plt.scatter(df_diff[str(column_name) + '_pre'], df_diff[str(column_name) + '_post'])
-    plt.xlabel(str(column_name))
-    plt.ylabel(str(column_name) + ' one day after')
-    plt.show()
-
-    df_diff_no_nan = df_diff.dropna()
+    X = noon_df[['U10']]
+    y = restr[column_name]
 
     
-    X_train, X_test, y_train, y_test = skl.model_selection.train_test_split(df_diff_no_nan[str(column_name) + '_pre'], df_diff_no_nan[str(column_name) + '_post'], test_size=0.25, random_state=42)
+
+
+    
+    X_train, X_test, y_train, y_test = skl.model_selection.train_test_split(X, y, test_size=0.25, random_state=42)
     
     return X_train, X_test, y_train, y_test
     
+new_column_list = ['RH', 'Sdur', 'Rain_accum_der', 'U10']
 
-pred_values = [11.6,	78,	161,	8.2,	0.2,	1019.9,	2.3]
-
-
-for i in range(len(column_list)):
-    print(column_list[i])
-    X_train, X_test, y_train, y_test = plt_dist_24(noon, column_list[i])
+for i in new_column_list:
+    print(i)
+    X_train, X_test, y_train, y_test = plt_dist_24(noon, i)
     # Create linear regression object
     regr = linear_model.LinearRegression()
 
-    array_x = np.array(X_train).reshape(-1,1)
-    array_y = np.array(y_train).reshape(-1,1)
+    #array_x = np.array(X_train).reshape(-1,1)
+    #array_y = np.array(y_train).reshape(-1,1)
     # Train the model using the training sets
-    regr.fit(array_x, array_y)
+    regr.fit(X_train, y_train)
     
-    array_X_test = np.array(X_test).reshape(-1,1)
-    array_y_test = np.array(y_test).reshape(-1,1)    
+ 
 
     # Make predictions using the testing set
-    y_pred = regr.predict(array_X_test)
+    y_pred = regr.predict(X_test)
     
     # The coefficients
     print('Coefficients: \n', regr.coef_)
@@ -117,14 +99,4 @@ for i in range(len(column_list)):
     print("Mean squared error: %.2f"
       % skl.metrics.mean_squared_error(y_test, y_pred))
     # Explained variance score: 1 is perfect prediction
-    print('Variance score: %.2f' %skl.metrics.r2_score(array_y_test, y_pred, multioutput='raw_values'))
-    
-    er = []
-
-    for j in range(len(y_test)):
-        x = abs(array_y_test[j] - y_pred[j])
-        er.append(x)
-    print('Variance' + str(np.var(er)))
-    
-    print(pred_values[i])
-    print(regr.predict(np.array(pred_values[i]).reshape(-1,1)))
+    print('Variance score: %.2f' %skl.metrics.r2_score(y_test, y_pred))#, multioutput='raw_values'))

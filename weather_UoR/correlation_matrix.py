@@ -41,8 +41,10 @@ for i in column_list:
     weather_no_nan_march[i].to_csv(str(i) + '.txt', index = False)
 
 ## correlation heat_map
+    
+noon_march = weather_no_nan_march[weather_no_nan_march['Time']=='1200'].reset_index(drop=True).drop(labels=['Time'],axis=1)    
 
-corr = weather_no_nan_march[column_list].corr()
+corr = noon_march[column_list].corr()
 
 
 

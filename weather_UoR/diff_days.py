@@ -52,7 +52,7 @@ noon = weather_no_nan[weather_no_nan['Time']=='1200'].reset_index(drop=True).dro
 noon['Month'] = noon['TimeStamp'].map(lambda x: x.month)
 noon['Number_of_days'] = noon['TimeStamp'].map(lambda x: (x-mydate).days)
 
-def plt_dist_48(noon_df, column_name):
+def plt_dist_24(noon_df, column_name):
 
     restr = noon_df[['Number_of_days', column_name]]
 
@@ -90,7 +90,7 @@ def plt_dist_48(noon_df, column_name):
     
 for i in column_list:
     print(i)
-    X_train, X_test, y_train, y_test = plt_dist_48(noon, i)
+    X_train, X_test, y_train, y_test = plt_dist_24(noon, i)
     # Create linear regression object
     regr = linear_model.LinearRegression()
 

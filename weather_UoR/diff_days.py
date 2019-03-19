@@ -90,9 +90,13 @@ def plt_dist_24(noon_df, column_name):
     
     return X_train, X_test, y_train, y_test
     
-for i in column_list:
-    print(i)
-    X_train, X_test, y_train, y_test = plt_dist_24(noon, i)
+
+pred_values = [11.6,	78,	161,	8.2,	0.2,	1019.9,	2.3]
+
+
+for i in range(len(column_list)):
+    print(column_list[i])
+    X_train, X_test, y_train, y_test = plt_dist_24(noon, column_list[i])
     # Create linear regression object
     regr = linear_model.LinearRegression()
 
@@ -114,3 +118,13 @@ for i in column_list:
       % skl.metrics.mean_squared_error(y_test, y_pred))
     # Explained variance score: 1 is perfect prediction
     print('Variance score: %.2f' %skl.metrics.r2_score(array_y_test, y_pred, multioutput='raw_values'))
+    
+    er = []
+
+    for j in range(len(y_test)):
+        x = abs(array_y_test[j] - y_pred[j])
+        er.append(x)
+    print('Variance' + str(np.var(er)))
+    
+    print(pred_values[i])
+    print(regr.predict(np.array(pred_values[i]).reshape(-1,1)))

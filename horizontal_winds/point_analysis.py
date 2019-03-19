@@ -19,11 +19,11 @@ def point_analysis(t0 = 7000, t1 = 9999):
             print('Saving frame', fname)
             plt.savefig(fname)
 
-def point_statistics_x(t0 = 7000, t1 = 9999):
+def point_statistics_x(t0 = 7000, t1 = 9999, t2 = 19994, t3 = 19995, t4 = 19996):
+    x_mean = np.zeros(82)
+    x_ssq = np.zeros(82)
     with open('Data/velocity_x.csv') as csvfile:
         readCSV = csv.reader(csvfile, delimiter=',')
-        x_mean = np.zeros(82)
-        x_ssq = np.zeros(82)
         j = -1
         for row in readCSV:
             if j >= t0:
@@ -33,7 +33,7 @@ def point_statistics_x(t0 = 7000, t1 = 9999):
         x_mean = (1/(t1-t0))*x_mean
         x_var = (x_ssq - (t1-t0)*np.square(x_mean))/(t1-t0)
         x_mean[0] = 0
-        x_var[0] = x_var[1]
+        x_var[0] = 0
         plt.clf()
         plt.plot(x_mean, '.')
         fname = 'plots/x_mean_points.png'
@@ -45,37 +45,55 @@ def point_statistics_x(t0 = 7000, t1 = 9999):
         print('Saving frame', fname)
         plt.savefig(fname)
 
-def point_statistics_y(t0 = 7000, t1 = 9999):
+    with open('Data/predictions_x.csv', 'w') as csvfile:
+        writeCSV = csv.writer(csvfile, delimiter=',')
+        x_mean[0] = t2
+        writeCSV.writerow(x_mean)
+        x_mean[0] = t3
+        writeCSV.writerow(x_mean)
+        x_mean[0] = t4
+        writeCSV.writerow(x_mean)
+    with open('Data/variances.csv', 'w') as csvfile:
+        writeCSV = csv.writer(csvfile, delimiter=',')
+        writeCSV.writerow(x_var)
+
+def point_statistics_y(t0 = 7000, t1 = 9999, t2 = 19994, t3 = 19995, t4 = 19996):
+    y_mean = np.zeros(82)
+    y_ssq = np.zeros(82)
     with open('Data/velocity_y.csv') as csvfile:
         readCSV = csv.reader(csvfile, delimiter=',')
-        y_mean = np.zeros(82)
-        y_ssq = np.zeros(82)
         j = -1
         for row in readCSV:
             if j >= t0:
                 y_mean = y_mean + np.array(row).astype(float)
                 y_ssq = y_ssq + np.square(np.array(row).astype(float))
             j += 1
-        y_mean = (1/(t1-t0))*y_mean
-        y_var = (y_ssq - (t1-t0)*np.square(y_mean))/(t1-t0)
-        y_mean[0] = 0
-        y_var[0] = y_var[1]
-        plt.clf()
-        plt.plot(y_mean, '.')
-        fname = 'plots/y_mean_points.png'
-        print('Saving frame', fname)
-        plt.savefig(fname)
-        plt.clf()
-        plt.plot(y_var, '.')
-        fname = 'plots/y_var_points.png'
-        print('Saving frame', fname)
-        plt.savefig(fname)
+    y_mean = (1/(t1-t0))*y_mean
+    y_var = (y_ssq - (t1-t0)*np.square(y_mean))/(t1-t0)
+    y_mean[0] = 0
+    y_var[0] = 0
+    plt.clf()
+    plt.plot(y_mean, '.')
+    fname = 'plots/y_mean_points.png'
+    print('Saving frame', fname)
+    plt.savefig(fname)
+    plt.clf()
+    plt.plot(y_var, '.')
+    fname = 'plots/y_var_points.png'
+    print('Saving frame', fname)
+    plt.savefig(fname)
 
-
-
-
-
-
+    with open('Data/predictions_y.csv', 'w') as csvfile:
+        writeCSV = csv.writer(csvfile, delimiter=',')
+        y_mean[0] = t2
+        writeCSV.writerow(y_mean)
+        y_mean[0] = t3
+        writeCSV.writerow(y_mean)
+        y_mean[0] = t4
+        writeCSV.writerow(y_mean)
+    with open('Data/variances.csv', 'w') as csvfile:
+        writeCSV = csv.writer(csvfile, delimiter=',')
+        writeCSV.writerow(y_var)
 
 
 

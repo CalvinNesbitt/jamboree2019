@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Mon Mar 18 10:56:07 2019
+Created on Mon Mar 18 15:07:38 2019
 
 @author: mc4117
 """
@@ -40,7 +40,12 @@ for i in column_list:
 
     weather_no_nan_march[i].to_csv(str(i) + '.txt', index = False)
 
+## correlation heat_map
+
+corr = weather_no_nan_march[column_list].corr()
 
 
 
-
+sns.heatmap(corr, annot=True,
+            xticklabels=['Dry bulb temperature', 'Relative humidity', 'Sunshine per hr', 'Rainfall per day', 'Pressure', '10m wind speed', '1m soil temp'],
+            yticklabels=['Dry bulb temperature', 'Relative humidity', 'Sunshine per hr', 'Rainfall per day', 'Pressure', '10m wind speed', '1m soil temp'], cmap='coolwarm', vmin=-1, vmax=1)

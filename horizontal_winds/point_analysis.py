@@ -71,6 +71,7 @@ def point_statistics_y(t0 = 7000, t1 = 9999):
         print('Saving frame', fname)
         plt.savefig(fname)
 
+#11000, 19995, 19996 ???
 
 
 

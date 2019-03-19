@@ -64,10 +64,13 @@ def plt_dist_24(noon_df, column_name):
 
     restr = noon_df[['Td', 'TSoil100', 'P', column_name]]
     
-    X = noon_df[['U10']]
+    X = noon_df[['RH']]
     y = restr[column_name]
 
-    
+    plt.scatter(X, y)
+    plt.xlabel('Relative Humidity')
+    plt.ylabel('Hourly Sunshine')
+    plt.show()
 
 
     
@@ -75,7 +78,7 @@ def plt_dist_24(noon_df, column_name):
     
     return X_train, X_test, y_train, y_test
     
-new_column_list = ['RH', 'Sdur', 'Rain_accum_der', 'U10']
+new_column_list = ['Sdur']
 
 for i in new_column_list:
     print(i)
@@ -100,3 +103,13 @@ for i in new_column_list:
       % skl.metrics.mean_squared_error(y_test, y_pred))
     # Explained variance score: 1 is perfect prediction
     print('Variance score: %.2f' %skl.metrics.r2_score(y_test, y_pred))#, multioutput='raw_values'))
+    
+    er = []
+    y_test = y_test.reset_index(drop = True)
+    for j in range(len(y_test)):
+        x = abs(y_test[j] - y_pred[j])
+        er.append(x)
+    print('Variance' + str(np.var(er)))
+    
+
+    print(regr.predict(np.array(78).reshape(-1,1)))

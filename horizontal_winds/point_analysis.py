@@ -150,11 +150,14 @@ if quiver == 1:
     n = 9
     X, Y = np.mgrid[0:n, 0:n]
     plt.clf()
+    U = point_statistics_x().T
+    V = point_statistics_y().T
 
-    U = point_statistics_x()
-    V = point_statistics_y()
-    print(V)
 
     plt.quiver(X, Y, U, V, alpha=.5)
     plt.quiver(X, Y, U, V, edgecolor='k', facecolor='None', linewidth=.5)
+    plt.xlim(0,8)
+    fname = 'plots/big_mean.png'
+    print('Saving frame', fname)
+    plt.savefig(fname)
     plt.show()

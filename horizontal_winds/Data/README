@@ -1,0 +1,40 @@
+This data is obtained from a 2D simulation of an incompressible
+fluid. The data consists of measurements of the x- and y-components of
+the fluid velocity over 9998 time steps, measured at 81 locations in
+the domain arranged in a 9x9 grid.
+
+The data is stored in .csv files in this directory, one per Cartesian
+component, with each line corresponding to the values at the 81
+measurement points at one time step.
+
+THE CHALLENGE FOR THIS DATASET
+
+This data set is the first half of a longer dataset. Your challenge is
+to provide forecasts for the measurements at the observation locations
+at three later timesteps of your choice. You should also quantify your uncertainty in this
+estimate by:
+* providing a variance that is the same for all of the values, or
+* providing a different variance value for each observation station, or
+* providing a covariance matrix, or
+* by providing one of the above separately for each component.
+
+The score for each prediction will be proportional to the negative
+log-likelihood of the true value given your prediction
+i.e. proportional to
+
+(u - u_T)^T\Sigma_u^{-1}(u-u_T) + (v - v_T)^T\Sigma_v^{-1}(v-v_T)
+
+where \Sigma_u and \Sigma_v are the covariance matrices for the
+uncertainty in your estimate for u and v respectively (we will
+construct a diagonal matrix from your individual variances if you use
+those), u and v are the 81-dimensional vectors containing your
+predictions of the velocity components.
+
+We will then multiply the score for each prediction by the lead time for
+it i.e. the number of timesteps into the future from the provided data
+set that you are predicting, before summing. 
+
+You should submit your predictions by 3pm Tuesday 19th March by adding
+the data to a public fork of this repository on Github (the same fork
+should be used for all three challenges in your group) and sending the
+SHA of the commit to colin.cotter@imperial.ac.uk.

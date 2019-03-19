@@ -12,7 +12,7 @@ plot = 0
 
 
 files = []
-with open('velocity_x.csv') as csvfile:
+with open('Data/velocity_x.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     x_vel = np.zeros([9,9])
     r = 0
@@ -32,7 +32,7 @@ with open('velocity_x.csv') as csvfile:
     # plt.clf()
 
 
-with open('velocity_y.csv') as csvfile:
+with open('Data/velocity_y.csv') as csvfile:
     readCSV = csv.reader(csvfile, delimiter=',')
     y_vel = np.zeros([9,9])
     r = 0
@@ -61,8 +61,8 @@ if quiver == 1:
     plt.quiver(X, Y, U, V, edgecolor='k', facecolor='None', linewidth=.5)
     plt.show()
 
-with open('velocity_x.csv') as cvsfile:
-    readCSV = csv.reader(cvsfile, delimiter=',')
-    x_var = np.zeros([9,9])
-    for row in readCSV:
-        np.var(np.array(row))
+# with open('Data/velocity_x.csv') as cvsfile:
+#     readCSV = csv.reader(cvsfile, delimiter=',')
+#     x_var = np.zeros([9,9])
+#     for row in readCSV:
+#         np.var(np.array(row))

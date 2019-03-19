@@ -64,7 +64,7 @@ def plt_dist_24(noon_df, column_name):
 
     restr = noon_df[['Td', 'TSoil100', 'P', column_name]]
     
-    X = restr[['Td', 'TSoil100', 'P']]
+    X = noon_df[['U10']]
     y = restr[column_name]
 
     
@@ -99,4 +99,4 @@ for i in new_column_list:
     print("Mean squared error: %.2f"
       % skl.metrics.mean_squared_error(y_test, y_pred))
     # Explained variance score: 1 is perfect prediction
-    print('Variance score: %.2f' %skl.metrics.r2_score(y_test, y_pred))5#, multioutput='raw_values'))
+    print('Variance score: %.2f' %skl.metrics.r2_score(y_test, y_pred))#, multioutput='raw_values'))
